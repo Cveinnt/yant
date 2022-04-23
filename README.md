@@ -1,6 +1,6 @@
 # `yant` - Yet Another Nvidia Top 
 
-![CI](https://github.com/peci1/nvidia-htop/workflows/CI/badge.svg)
+![CI](https://github.com/cveinnt/yant/workflows/CI/badge.svg)
 
 If there is one thing we don't have enough of, it's the amount of ways to make `nvidia-smi` actually readable. 
 
