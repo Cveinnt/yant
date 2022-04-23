@@ -18,13 +18,41 @@ Here's ***Y**et **A**nother **N**vidia **T**op* (or `yant`) written in simple, s
 
 ## Installation
 
-- First, install the required `termcolor` package with `pip3 install termcolor`. 
-- Then, you may clone this repository with `git clone`, then `cd yant` into the directory and use `yant` with `python3 yant.py`. Feel free to use flags to customize the outputs. 
-- (Optional) To facilitate usage, you can create an alias to `yant` by adding `alias yant="python3 /path/to/yant/yant.py"` to your `~/.bashrc` or `~/.zshrc` file, where `/path/to/yant/` is the result of `pwd` when you are in `yant`'s directory.
-- (Optional) To make `yant` more `htop`-like, use the `watch` utility: `watch python3 yant.py`. To get colored output, you have to pass option `-c` to both `watch` and `yant`, e.g. `watch -c yant.py -c`.
+First, install the required `termcolor` package with 
 
-- If `yant` is useful to you, please star ⭐️ it to let more people know 🤗, or consider contributing to it!
+```bash
+pip3 install termcolor
+``` 
 
+Then, you may clone this repository with 
+
+```bash
+git clone https://github.com/Cveinnt/yant
+```
+
+Next `cd yant` into the directory and use `yant` with 
+
+```bash
+python3 yant.py
+```
+
+Feel free to use flags to customize the outputs. 
+
+**(Optional)** To make `yant` more `top`-like, use the `watch` utility: `watch python3 yant.py`. To get colored output, you have to use color flags, e.g. `watch -c yant.py --colored`.
+
+### **Recommended** 
+If you want, you can just copy 
+```bash
+alias yant="watch -c python3 /path/to/yant/yant.py --colored"
+```
+to your `~/.bashrc` or `~/.zshrc` file, where `/path/to/yant/` is the output of `pwd` when you are in `yant`'s directory.
+Then you can just run 
+```bash
+$ yant
+```
+and watch the magic happens.
+
+**If `yant` is useful to you, please star ⭐️ it to let more people know 🤗, or consider contributing to it!**
 
 ## Usage
 
@@ -39,7 +67,7 @@ Here's ***Y**et **A**nother **N**vidia **T**op* (or `yant`) written in simple, s
 
       --colored                        Toggle whether or not to color the output.  
                                        Note: using this flag will mess up outputs 
-                                       used with `watch`.                             
+                                       used with `watch`. Use `watch -c` instead.                             
       
       --high [float]                   Set threshold value for what is considered a high 
                                        GPU usage. Should be a float value between 0 and 1.
@@ -51,7 +79,7 @@ Here's ***Y**et **A**nother **N**vidia **T**op* (or `yant`) written in simple, s
                                        
       --show-gpu                       Toggle GPU name disply. Sometimes `nvidia-smi` 
                                        does not display the full GPU name. Use this flag to 
-                                       display the full name.                                     
+                                       display the full name. Only available to GeForce GPUs.                                    
     
 Outputs are color coded, specifically: 
 - red means: `GPU utilization` or `GPU memory` >= `high`
