@@ -1,6 +1,6 @@
 # `yant` - Yet Another Nvidia Top 
 
-![CI](https://github.com/cveinnt/yant/workflows/CI/badge.svg)
+![Python 3.5+](https://img.shields.io/badge/Python-3.5%2B-brightgreen.svg)
 
 If there is one thing we don't have enough of, it's the amount of ways to make `nvidia-smi` actually readable. 
 
