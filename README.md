@@ -27,7 +27,7 @@ pip3 install termcolor
 Then, you may clone this repository with 
 
 ```bash
-git clone https://github.com/Cveinnt/yant
+git clone https://github.com/Cveinnt/yant.git
 ```
 
 Next `cd yant` into the directory and use `yant` with 
