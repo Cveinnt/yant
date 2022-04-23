@@ -1,4 +1,4 @@
-# `yant` - Yet Another Nvidia Top 
+# **yant** - _**Y**et **A**nother **N**vidia **T**op_ 
 
 ![Python 3.5+](https://img.shields.io/badge/Python-3.5%2B-brightgreen.svg)
 
