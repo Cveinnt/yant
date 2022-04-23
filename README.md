@@ -16,6 +16,13 @@ Here's ***Y**et **A**nother **N**vidia **T**op* (or `yant`) written in simple, s
   (Note: <code>USER</code> is removed for privacy protection)
 </p>
 
+## Features
+- Based on `nvidia-smi` but is more natural
+- Better process control, including viewing the current command ran on different GPUs.
+- Colored outputs with lots of options for customization.
+- Actually shows the GPUs when `nvidia-smi` sometimes collapse them as `...`
+- And many more to come...
+
 ## Installation
 
 First, install the required `termcolor` package with 
@@ -46,7 +53,7 @@ If you want, you can just copy
 alias yant="watch -c python3 /path/to/yant/yant.py --colored"
 ```
 to your `~/.bashrc` or `~/.zshrc` file, where `/path/to/yant/` is the output of `pwd` when you are in `yant`'s directory.
-Then you can just run 
+Don't forget to `source ~/.zshrc`! Then you can just run 
 ```bash
 $ yant
 ```
@@ -56,7 +63,7 @@ and watch the magic happens.
 
 ## Usage
 
-    python3 yant.py
+    $ python3 yant.py
 
       Print current GPU utilization with better formatting and color support.
 
