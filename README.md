@@ -133,4 +133,4 @@ TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION, AND MODIFICATION
 ```
 
 ## Credits
-`yant` is inspired by [nvidia-top](https://github.com/peci1/nvidia-htop) and [nvitop](https://github.com/XuehaiPan/nvitop).
+`yant` is inspired by and based heavily on [nvidia-htop](https://github.com/peci1/nvidia-htop).
