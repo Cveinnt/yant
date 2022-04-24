@@ -1,23 +1,29 @@
 #!/usr/bin/env python3
 import sys
-import os
 import re
 import subprocess
 import select
 import argparse
 from termcolor import colored
 
+colors = ["grey", "red", "green", "yellow", "blue", "magenta", "cyan", "white"]
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--length', default=20, const=100, type=int, nargs='?')
 parser.add_argument('--high', default=0.8, type=float, nargs='?')
 parser.add_argument('--low', default=0.1, type=float, nargs='?')
 parser.add_argument('--show-gpu', action='store_true')
-parser.add_argument('--colored', action='store_true')
+#parser.add_argument('--colored', action='store_true') # removed after consideration
+parser.add_argument('--high-color', default='red', type=str)
+parser.add_argument('--mid-color', default='yellow', type=str)
+parser.add_argument('--low-color', default='green', type=str)
 args = parser.parse_args()
-length, high, low, show, color = args.length, args.high, args.low, args.show_gpu, args.colored
+length, high, low, show = args.length, args.high, args.low, args.show_gpu
+highC, midC, lowC = args.high_color, args.mid_color, args.low_color
 
 assert high < 1 and high > 0 and low < 1 and low > 0, "high or low must be within (0,1)!"
 assert high > low, "high must be higher than low!"
+assert highC in colors and midC in colors and lowC in colors, "Color must be within accepted colors, e.g. {}".format(colors)
 
 MEMORY_MODERATE_RATIO = GPU_MODERATE_RATIO = high
 MEMORY_FREE_RATIO = GPU_FREE_RATIO = low
@@ -55,7 +61,7 @@ def colorize(_lines):
             is_high = gpu_util >= GPU_MODERATE_RATIO or mem_util >= MEMORY_MODERATE_RATIO
             if not is_high:
                 is_moderate = gpu_util >= GPU_FREE_RATIO or mem_util >= MEMORY_FREE_RATIO
-            c = 'red' if is_high else ('yellow' if is_moderate else 'green')
+            c = highC if is_high else (midC if is_moderate else lowC)
             _lines[j] = colored(_lines[j], c)
             _lines[j-1] = colored(_lines[j-1], c)
     return _lines
@@ -81,8 +87,8 @@ for i in range(len(lines)):
         break
 
 # colorize outputs. absolutely crucial.
-if color:
-    lines_to_print = colorize(lines_to_print)
+#if color:
+lines_to_print = colorize(lines_to_print)
 
 # we print all but the last line which is the +---+ separator
 for line in lines_to_print[:-1]:
