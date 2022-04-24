@@ -30,6 +30,8 @@ Here's ***Y**et **A**nother **N**vidia **T**op* (or `yant`) written in simple, s
 - No more `NVIDIA GeForce ...`! `yant` gives the option to toggle gpu name display
 - ...and many more to come
 
+**If `yant` is useful to you, please star ⭐️ it to let more people know 🤗, or consider contributing to it!**
+
 ## Installation
 
 First, install the required `termcolor` package with 
@@ -66,7 +68,7 @@ $ yant
 ```
 and watch the magic happens.
 
-**If `yant` is useful to you, please star ⭐️ it to let more people know 🤗, or consider contributing to it!**
+To exit `watch`, simply use `Ctrl+C`.
 
 ## Usage
 
