@@ -9,18 +9,11 @@ Here's ***Y**et **A**nother **N**vidia **T**op* (or `yant`) written in simple, s
 ## Demo
 
 <p align="center">
-  <img width="70%" src="demo.png" alt="Monitor">
-  </br>
-  Sample output of <code>yant</code>.
-  </br>
-  (Note: <code>USER</code> is removed for privacy protection)
-</p>
-
-<p align="center">
   <img width="70%" src="demo-color.png" alt="Monitor">
   </br>
   <code>yant</code> with customized colors.
   </br>
+  (Note: <code>USER</code> is removed for privacy protection)
 </p>
 
 ## Features
