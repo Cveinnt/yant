@@ -5,7 +5,9 @@ import subprocess
 import select
 import argparse
 from termcolor import colored
+from blessings import Terminal
 
+term = Terminal()
 colors = ["grey", "red", "green", "yellow", "blue", "magenta", "cyan", "white"]
 
 parser = argparse.ArgumentParser()
@@ -13,7 +15,6 @@ parser.add_argument('--length', default=20, const=100, type=int, nargs='?')
 parser.add_argument('--high', default=0.8, type=float, nargs='?')
 parser.add_argument('--low', default=0.1, type=float, nargs='?')
 parser.add_argument('--show-gpu', action='store_true')
-#parser.add_argument('--colored', action='store_true') # removed after consideration
 parser.add_argument('--high-color', default='red', type=str)
 parser.add_argument('--mid-color', default='yellow', type=str)
 parser.add_argument('--low-color', default='green', type=str)
@@ -47,25 +48,6 @@ else:
     gpus = [gpu + '\n' for gpu in gpu_names[:-1]]
     gpus += gpu_names[-1]
 
-
-def colorize(_lines):
-    for j in range(len(_lines)):
-        line = _lines[j]
-        m = re.match(r"\| (?:N/A|..%)\s+[0-9]{2,3}C.*\s([0-9]+)MiB\s+/\s+([0-9]+)MiB.*\s([0-9]+)%", line)
-        if m is not None:
-            used_mem = int(m.group(1))
-            total_mem = int(m.group(2))
-            gpu_util = int(m.group(3)) / 100.0
-            mem_util = used_mem / float(total_mem)
-            is_moderate = False
-            is_high = gpu_util >= GPU_MODERATE_RATIO or mem_util >= MEMORY_MODERATE_RATIO
-            if not is_high:
-                is_moderate = gpu_util >= GPU_FREE_RATIO or mem_util >= MEMORY_FREE_RATIO
-            c = highC if is_high else (midC if is_moderate else lowC)
-            _lines[j] = colored(_lines[j], c)
-            _lines[j-1] = colored(_lines[j-1], c)
-    return _lines
-
 lines_to_print = []
 is_new_format = False
 
@@ -86,9 +68,26 @@ for i in range(len(lines)):
         i += 1
         break
 
-# colorize outputs. absolutely crucial.
-#if color:
-lines_to_print = colorize(lines_to_print)
+def magik(_lines):
+    for j in range(len(_lines)):
+        line = _lines[j]
+        m = re.match(r"\| (?:N/A|..%)\s+[0-9]{2,3}C.*\s([0-9]+)MiB\s+/\s+([0-9]+)MiB.*\s([0-9]+)%", line)
+        if m is not None:
+            used_mem = int(m.group(1))
+            total_mem = int(m.group(2))
+            gpu_util = int(m.group(3)) / 100.0
+            mem_util = used_mem / float(total_mem)
+            is_moderate = False
+            is_high = gpu_util >= GPU_MODERATE_RATIO or mem_util >= MEMORY_MODERATE_RATIO
+            if not is_high:
+                is_moderate = gpu_util >= GPU_FREE_RATIO or mem_util >= MEMORY_FREE_RATIO
+            c = highC if is_high else (midC if is_moderate else lowC)
+            _lines[j] = term.bold + colored(_lines[j], c)
+            _lines[j-1] = colored(_lines[j-1], c)
+    return _lines
+
+# colorize and process outputs. absolutely crucial.
+lines_to_print = magik(lines_to_print)
 
 # we print all but the last line which is the +---+ separator
 for line in lines_to_print[:-1]:
@@ -167,11 +166,11 @@ for i in range(len(pid)):
         gpu_num[i],
         pid[i],
         user[i],
-        gpu_mem[i],
-        cpu[i],
-        mem[i],
+        " " + term.bold_cyan(gpu_mem[i]),
+        "  " + term.bold_magenta(cpu[i]),
+        "  " + term.bold_red(mem[i]),
         time[i],
         command[i]
     ))
 
-print("+" + ("-" * (len(line) - 2)) + "+")
+print(term.normal + "+" + ("-" * (len(line) - 2)) + "+")

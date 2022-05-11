@@ -9,7 +9,7 @@ Here's ***Y**et **A**nother **N**vidia **T**op* (or `yant`) written in simple, s
 ## Demo
 
 <p align="center">
-  <img width="70%" src="demo-color.png" alt="Monitor">
+  <img width="70%" src="demo.png" alt="Monitor">
   </br>
   <code>yant</code> with customized colors.
   </br>
@@ -27,10 +27,10 @@ Here's ***Y**et **A**nother **N**vidia **T**op* (or `yant`) written in simple, s
 
 ## Installation
 
-First, install the required `termcolor` package with 
+First, install the required packages with 
 
 ```bash
-pip3 install termcolor
+pip3 install -r requirements.txt
 ``` 
 
 Then, you may clone this repository with 
@@ -128,4 +128,4 @@ TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION, AND MODIFICATION
 ```
 
 ## Credits
-`yant` is inspired by and based heavily on [nvidia-htop](https://github.com/peci1/nvidia-htop).
+`yant` is inspired by [nvidia-htop](https://github.com/peci1/nvidia-htop).
